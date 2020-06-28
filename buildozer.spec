@@ -1,6 +1,7 @@
 [app]
 
 # (str) Title of your application
+# example change to file
 title = Poppy
 
 # (str) Package name
