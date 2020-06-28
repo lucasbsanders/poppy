@@ -1,0 +1,29 @@
+Initial setup:
+git clone https://github.com/lucasbsanders/poppy.git
+cd poppy
+
+Checkout master branch:
+git checkout master
+
+Check status:
+git status
+
+Pull updates from server:
+git pull
+
+Create a new local branch:
+git branch lucas-setup-build
+git checkout lucas-setup-build
+
+Commit changes and push your branch:
+git add *
+git commit -m 'added the git instructions file'
+git push (follow instructions if there is an error)
+
+Raise a pull request to merge your changes:
+Go to https://github.com/lucasbsanders/poppy
+Click on "Pull Requests", "New Pull Request", set the compare branch to your branch
+Create pull request
+In the pull request, make sure to use "squash and merge"
+
+
