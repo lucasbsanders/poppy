@@ -1,0 +1,25 @@
+The GitHub Desktop Application will help you manage your code on the project
+
+Download GitHub Desktop for Windows, and log in with account
+
+In https://github.com/lucasbsanders/poppy, click "clone" and "Open in Desktop"
+
+Pull updates from the server:
+Click "Current Branch" and select "master"
+Click "Fetch Origin"
+
+Create a new local branch:
+Click "Current Branch", "New Branch"
+Name it lucas-build-setup (your name and the work you're currently doing)
+Select "bring my changes" (if it's an option) and switch to the new branch
+
+Commit changes and push your branch:
+Verify that all the files under "Changes" are selected
+Write a message in the "Summary" box and click "Commit to lucas-build-setup" (your equivalent branch name)
+Click "Publish Branch" (or "Push Origin")
+
+Raise a pull request to merge your changes:
+Go to https://github.com/lucasbsanders/poppy
+Click on "Pull Requests", "New Pull Request", set the compare branch to your branch
+Create pull request
+In the pull request, make sure to use "squash and merge"
