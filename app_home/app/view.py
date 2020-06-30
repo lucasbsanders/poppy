@@ -2,12 +2,10 @@ from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import StringProperty, NumericProperty
-
+from jnius import autoclass, cast
 from kivy.uix.modalview import ModalView
 from kivy.garden.circulardatetimepicker import CircularTimePicker as CTP
 from kivy.uix.button import Button
-from kivy.lang import Builder
-from kivy.uix.camera import Camera
 import time
 
 from kivy.metrics import sp, dp
