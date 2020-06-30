@@ -16,14 +16,3 @@ pip install Cython==0.29.19
 (add the following line at the end of your ~/.bashrc file) export PATH=$PATH:~/.local/bin/
 buildozer android debug deploy run
 (to end virtual environment) deactivate
-
-to run in Ubuntu:
-garden install circulardatetimepicker
-garden install circularlayout
-garden install iconfonts
-garden install datetimepicker
-garden install iconfonts
-garden install roulette
-garden install roulettescroll
-garden install tickline
-garden install navigationdrawer
