@@ -13,6 +13,7 @@ pip install kivy[base] kivy_examples --pre --extra-index-url https://kivy.org/do
 sudo apt install -y zip unzip openjdk-8-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
 pip install --upgrade buildozer
 pip install Cython==0.29.19
+pip install KivyCalendar
 (add the following line at the end of your ~/.bashrc file) export PATH=$PATH:~/.local/bin/
 buildozer android debug deploy run
 (to end virtual environment) deactivate
