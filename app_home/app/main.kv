@@ -1,7 +1,7 @@
-
 #: import rgba kivy.utils.rgba
 #: import icon kivy.garden.iconfonts.icon
 #: import mtx kivy.metrics
+#: import DatePicker datepicker.datepicker.DatePicker
 #: import NavigationDrawer kivy.garden.navigationdrawer.NavigationDrawer
 
 <MainWindow>:
@@ -458,12 +458,8 @@
 		BoxLayout:
 			id: datetime
 			size_hint_y: .15
-			padding: '1dp'
-			orientation: "vertical"
-
-        	CircularTimePicker
-
-        	Button:
+			padding: '4dp'
+			DatePicker: 
 				id: task_date
 				size_hint_x: .7
 				background_active: ''
