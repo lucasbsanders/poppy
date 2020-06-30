@@ -1,6 +1,7 @@
 #: import rgba kivy.utils.rgba
 #: import icon kivy.garden.iconfonts.icon
 #: import mtx kivy.metrics
+##: import Camera kivy.uix.camera
 #: import DatePicker datepicker.datepicker.DatePicker
 #: import NavigationDrawer kivy.garden.navigationdrawer.NavigationDrawer
 
@@ -165,6 +166,15 @@
 							nav.toggle_state()
 							root.add_new()
 					Widget:
+					ListEntry:
+						text: '%s Go to Cam' %icon('zmdi-camera')
+						markup: True
+						color: rgba('#0e5174')
+						size_hint_y: .07
+						on_release: 
+							nav.toggle_state()
+							scrn_mngr.current = 'scrn_camera'
+							# root.add_new()
 				BoxLayout:
 					orientation: 'vertical'
 					id: main_content
@@ -299,7 +309,50 @@
 										# 	time: '10:24'
 										# 	size_hint: (1, None)
 										# 	height: mtx.dp(100)
-									
+
+		Screen:
+			name: 'scrn_camera'
+			BoxLayout:
+	            orientation: 'vertical'
+				BoxLayout: 
+					size_hint_y: .07
+					padding: [mtx.dp(15), mtx.dp(5)]
+					FlatButton: 
+						text: icon('zmdi-arrow-back')
+						markup: True
+						color: rgba('#0e1574')
+						font_size: mtx.dp(18)
+						text_size: self.size
+						valign: 'middle'
+						size_hint_x: .7
+						on_release: scrn_mngr.current = 'scrn_main'
+					Label:
+						text: 'CAMERA'
+						size_hint_x: .3
+						text_size: self.size
+						halign: 'right'
+						valign: 'middle'
+						color: rgba('#0e5174')
+						bold: True
+				BoxLayout:
+					size_hint_y: .93
+					orientation: 'vertical'
+					BoxLayout:
+
+						CameraClick:
+
+					# ScrollView:
+					# 	size_hint_y: None
+					# 	height: self.parent.height
+						# GridLayout:
+						# 	id: all_today
+						# 	cols: 2
+						# 	size_hint_y: None
+						# 	size: self.minimum_size
+						# 	padding: mtx.dp(10)
+						# 	spacing: mtx.dp(10)
+				
+
 		Screen:
 	        name: 'scrn_today'
 	        BoxLayout:
@@ -539,6 +592,7 @@
                 font_size: mtx.sp(18)
                 markup: True
                 on_release: app.root.delete_task(root)
+
 <Today>:
 	orientation: 'vertical'
 	padding: '15dp'
@@ -597,7 +651,22 @@
 				color: rgba('#4a4a4a')
 				on_release: app.root.delete_task(root)
 			
-
+<CameraClick>:
+    orientation: 'vertical'
+    Camera:
+        id: camera
+        resolution: (640, 480)
+        play: True
+    ToggleButton:
+        text: 'Play'
+        on_press: camera.play = not camera.play
+        size_hint_y: None
+        height: '48dp'
+    Button:
+        text: 'Capture'
+        size_hint_y: None
+        height: '48dp'
+        on_press: root.capture()
 <NewButton>:
 	canvas.before:
 		Color:

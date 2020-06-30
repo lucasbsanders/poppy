@@ -6,12 +6,28 @@ from kivy.properties import StringProperty, NumericProperty
 from kivy.uix.modalview import ModalView
 from kivy.garden.circulardatetimepicker import CircularTimePicker as CTP
 from kivy.uix.button import Button
+from kivy.lang import Builder
+from kivy.uix.camera import Camera
+import time
 
 from kivy.metrics import sp, dp
 from kivy.utils import rgba
 from app.storage.db import Database
 
+
 from datetime import datetime
+
+
+class CameraClick(BoxLayout):
+    def capture(self):
+        '''
+        Function to capture the images and give them the names
+        according to their captured time and date.
+        '''
+        camera = self.ids['camera']
+        timestr = time.strftime("%Y%m%d_%H%M%S")
+        camera.export_to_png("IMG_{}.png".format(timestr))
+        print("Captured")
 
 
 class NewTask(ModalView):
