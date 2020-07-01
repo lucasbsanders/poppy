@@ -1,7 +1,6 @@
 # pip install ics
 # pip install pyspellchecker
 # pip install pytesseract
-# pip install cv2
 import numpy as np
 import cv2
 import pytesseract
@@ -30,15 +29,14 @@ def img_pipeline():
 
     # Reading in the images to process
     img_one = cv2.imread("images/alamy.jpg")  # Nope lol
-    img_two = cv2.imread("images/amoxicillin.jpeg")  # Good Further Processing Required
+    img_two = cv2.imread("images/amoxicillin.jpeg")  # Good remove fullstops using regex
     img_three = cv2.imread("images/calvin.jpeg")  # Good
     img_four = cv2.imread("images/chris.jpg")  # Not Good (directive)
-    img_five = cv2.imread("images/elvis.jpeg")  # Not Good (duration)
+    img_five = cv2.imread("images/elvis.jpeg")  # Good (duration) make ONA->one
     img_six = cv2.imread("images/chris2.jpg")  # Good Further processing required
-    img_five = cv2.imread("images/elvis.jpeg")  # Not Good (duration)
-    img_eight = cv2.imread("images/jane.jpeg")  # Good Further Processing
+    img_eight = cv2.imread("images/jane.jpeg")  # Good
     img_nine = cv2.imread("images/miley.png")  # Good
-    img_ten = cv2.imread("images/opioid-bottle.jpg")  # Good Further Processing // Fix me
+    img_ten = cv2.imread("images/opioid-bottle.jpg")  # Good
     img_eleven = cv2.imread("images/warfarin.jpg")  # Good
 
     # Building the Image Processing Pipeline.
@@ -47,7 +45,7 @@ def img_pipeline():
     # This size depends on the size of the picture's text
     # If the image is larger than a certain size reduce its size else increase its size
     # Change this so the user can select the image
-    resized = resize(img_eleven)
+    resized = resize(img_four)
 
     # 2
     # Convert the image to grayscale to remove any filtering
@@ -72,9 +70,25 @@ def img_pipeline():
     # cv2.imshow("IMG2", resized)
     # cv2.imshow("IMG1", threshold)
     # Keep the image open
-    cv2.waitKey(0)   # Use NLTK To complete the Directives and their Durations
+    cv2.waitKey(0)  # Use NLTK To complete the Directives and their Durations
     # Convert Directives and Logic into events on an ics file.
-    return img_to_return
+    preprocessed_string = pytesseract.image_to_string(img_to_return)
+    # I had to write the text to a file to remove the formatting that pytessaract has on the string
+    write_to_file("tessaract_text.txt", preprocessed_string)
+
+    string_from_file = get_text("tessaract_text").replace("\n", " ")
+
+    return string_from_file
 
 
+def get_text(filename_root):
+    name = open(filename_root + '.txt')
+    text = name.read()
+    name.close()
+    return text
 
+
+def write_to_file(filename, string):
+    file_name = open(filename, 'w')
+    file_name.write(string)
+    file_name.close()
