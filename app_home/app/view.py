@@ -268,14 +268,13 @@ class MainWindow (BoxLayout):
             user = (username.text, password.text)
 
             if self.db.add_user(user):
-                self.ids.scrn_mngr.current = 'scrn_signin'
+                self.ids.scrn_mngr.current = 'scrn_mains'
 
     def auth_user(self, username, password):
         uname = username.text
         upass = password.text
 
         if self.db.auth_user((uname, upass)):
-
             self.ids.scrn_mngr.current = 'scrn_main'
 
         username.text = ''
