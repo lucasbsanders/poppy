@@ -1,8 +1,5 @@
+# pip install sympound
 from spellchecker import SpellChecker
-<<<<<<< HEAD
-=======
-import pytesseract
->>>>>>> master
 import re
 from image_processor import img_pipeline
 
@@ -44,7 +41,6 @@ def correct_duration(duration):
 def text_pipeline():
     token_duration = []
     token_directive = []
-<<<<<<< HEAD
     duration = ""
     directive = ""
     # extract the text from the images
@@ -54,28 +50,16 @@ def text_pipeline():
     preprocessed_text = preprocessed_text.strip("\n")
     # print the text
     print("The text from the image is: ", preprocessed_text)
-=======
-    # extract the text from the images
-    processed_img = img_pipeline()
-    text_one = pytesseract.image_to_string(processed_img)
-    # print the text
-    print("The text from the image is: ", text_one)
->>>>>>> master
 
     # Extract the directive from the prescription
     text = "Take many pills as Needed"
     # Add try catches
     try:
         directive_searcher = re.search(
-<<<<<<< HEAD
             "([T]?[A][K][E]?|[G]?[I][V][E]?|[A]?[D][M][I][N][I][S][T][E][R]?)(.*)([M]["
             "O][U][T]?[H]?|[O]?[R]?[A][L][L][Y]?|[T]?[A][B][L][E][T][S]?|[C][A][P][S][U][L][E][S]|"
             "[T][I][M][E][S]?|[D][A]?[I]?[L][Y])",
             preprocessed_text)
-=======
-            "([Tt]?[Aa][Kk][Ee]?|[Gg]?[Ii][Vv][Ee]?|[Aa]?[Dd][Mm][Ii][Nn][Ii][Ss][Tt][Ee][Rr]?)(.*)([Mm]?["
-            "Oo][Uu]?[Tt]?[Hh]?|[Oo]?[Rr]?[Aa][Ll][Ll][Yy]?|[Tt]?[Aa][Bb][Ll][Ee][Tt][Ss]?)", text_one)
->>>>>>> master
         directive = directive_searcher.group(0)
         token_directive = correct_directive(directive)
         print("This is the directive:", directive)
@@ -84,28 +68,17 @@ def text_pipeline():
 
     try:
         duration_searcher = re.search(
-<<<<<<< HEAD
             "([E]?[V]?[E][R][Y]|[D][A][I][L][Y])(.*)"
             "([D][A][I][L][Y]|[H]?[O][U][R][S]?|"
             "[D][A][Y][S]?|[W][E][E][K][S]|[M][O][R][N][I][N][G][S]?|[A][F][T][E][R]"
             "[N][O][O][N][S]?|[N][I][G][H][T][S]?)", preprocessed_text)
-=======
-            "([Ee]?[Vv]?[Ee][Rr][Yy]|[Oo][Nn]?[Cc][Ee]|[Tt][Ww]?[Ii]?[Cc]?[Ee]|[Tt][Hh]?[Rr]?[Ii]?[Cc]?[Ee]|"
-            "[Dd][Aa]?[Ii]?[Ll]?[Yy]|\d\s)(.*)([Dd][Aa]?[Ii]?[Ll]?[Yy]|[Hh]?[Oo][Uu][Rr][Ss]?|"
-            "[Dd][Aa][Yy][Ss]?|[Ww][Ee][Ee][Kk][Ss]|[Mm][Oo][Rr][Nn][Ii][Nn][Gg][Ss]?|[Aa][Ff][Tt][Ee][Rr]"
-            "[Nn][Oo][Oo][Nn][Ss]?|[Nn][Ii][Gg][Hh][Tt][Ss]?)", text_one)
->>>>>>> master
         duration = duration_searcher.group(0)
         token_duration = correct_duration(duration)
         print("This is the duration: ", duration)
     except AttributeError:
-<<<<<<< HEAD
         duration = "EVERY DAY"
         token_duration = correct_duration(duration)
         print("This is the duration: ", duration)
-=======
-        print("Couldn't Find the Duration")
->>>>>>> master
 
     print(token_duration)
     print(token_directive)
