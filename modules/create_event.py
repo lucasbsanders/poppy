@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from ics import Calendar, Event, alarm
 from text_processor import text_pipeline
 from datetime import datetime
@@ -25,31 +24,10 @@ def create_ics_file(duration_directive_tuple):
             print(" ")
         except ValueError:
             print("Please Enter a whole number!!!\n")
-=======
-from ics import Calendar, Event
-from text_processor import text_pipeline
-
-
-#
-def create_ics_file(duration_directive_tuple):
-    c = Calendar()
-    e = Event()
-    directive = duration_directive_tuple[0]
-    duration = duration_directive_tuple[1]
-
-    # Add Error Handling stuff
-    medication = str(input("What would you like to call this medicine: "))
-    while True:
-        try:
-            quantity = int(input("How many pills are in the bottle: "))
-        except ValueError:
-            print("Please Enter a whole number!!!")
->>>>>>> master
             continue
         else:
             break
 
-<<<<<<< HEAD
     # if "HOURS" in duration:
     #     # Look for and extract the number range of hours
     #     hourly_range = 1
@@ -114,19 +92,6 @@ def create_ics_file(duration_directive_tuple):
     # if ("DAY" in duration) | ("EVERYDAY" in duration) | ("DAILY" in duration):
     #
     # # If the medication is to be taken daily
-=======
-    if "HOURS" in duration:
-        # Look for and extract the number range of hours
-        hours = [hour for hour in duration if hour[0].isnumeric()]
-
-        # Gets rid of any extra numbers left from the preprocessing step
-        if len(hours) > 1:
-            hours = hours[-1]
-    if ("DAY" in duration) | ("EVERYDAY" in duration) | ("DAILY" in duration):
-        frequency = {"ONCE": 1, "ONE": 1, "TWICE": 2, "THRICE": 3, "THREE": 3,  "FOUR": 4}
-
-    # If the medication is to be taken daily
->>>>>>> master
     # if duration.__contains__("EVERYDAY"):
     #     # duration[0] should be the number of pills taken each time since duration = "# EVERYDAY"
     #     # Use days_to_schedule to figure out how many events to add
@@ -152,10 +117,6 @@ def create_ics_file(duration_directive_tuple):
     # with open('prescription.ics', 'w') as my_file:
     #     my_file.writelines(c)
     # # and it's done !
-<<<<<<< HEAD
-=======
-    #
->>>>>>> master
 
 
 def main():
