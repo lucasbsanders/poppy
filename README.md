@@ -1,6 +1,17 @@
 # poppy
 
-Currently this is a taskmanager-liked project. In the future we are going to implement OCR, notification, firebase, etc.
+Currently this is a taskmanager-like project.
+In phase 1, we've:
+- Implemented the build + deployment process
+- Created a simple view with a list of notifications
+- Integrated the camera to take pictures
+- Implemented separately the OCR and text-parsing functionality
+
+In phase 2, we plan to extend the project by:
+- Resolving UI issues
+- Connecting the OCR/Text parser to the camera feature of the view
+- Integrating a form that will be auto-filled by the OCR/text parser
+- Implementing notifications for events
 
 # Usage
 
