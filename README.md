@@ -16,7 +16,7 @@ Currently this is a taskmanager-liked project. In the future we are going to imp
 3. The task update function has been temporarily disabled due to unknown bugs.
 
 
-Contributors:
+# Contributors:
 - Lucas Sanders
 - Haozhe Zhang
 - Oluwapemisin Bandy-toyo
