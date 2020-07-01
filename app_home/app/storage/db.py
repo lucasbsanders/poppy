@@ -7,8 +7,8 @@ class Database(object):
     def __init__(self):
         self.path = 'app/storage/'
 
-        if not os.path.exists(os.path.join(self.path, 'db.sqlite')):
-            conn = sqlite3.connect(os.path.join(self.path, 'db.sqlite'))
+        if not os.path.exists('db.sqlite'):
+            conn = sqlite3.connect('db.sqlite')
             cur = conn.cursor()
 
             sql = '''
@@ -25,7 +25,7 @@ class Database(object):
             cur.execute(sql1)
 
     def db_connect(self):
-        conn = sqlite3.connect(os.path.join(self.path, 'db.sqlite'))
+        conn = sqlite3.connect('db.sqlite')
         # cur = conn.cursor()
 
         return conn
