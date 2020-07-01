@@ -133,7 +133,7 @@ class MainWindow (BoxLayout):
 
             # else:
             task = Upcoming()
-            task.name = t[1].upper()
+            task.name = t[1]
             task.og_name = t[1]
             # Change this later
             # task.time = ' '.join([date, time])
@@ -143,7 +143,7 @@ class MainWindow (BoxLayout):
             task.height = dp(100)
 
             itask = Upcoming()
-            itask.name = t[1].upper()
+            itask.name = t[1]
             itask.og_name = t[1]
             # Change this later
             # itask.time = ' '.join([date, time])
@@ -250,7 +250,7 @@ class MainWindow (BoxLayout):
             task = Upcoming()
             task.og_name = xtask[0].text
             task.date = str(datetime.today()).split(' ')[0]
-            task.name = xtask[0].text.upper()
+            task.name = xtask[0].text
             # Change this later
             # task.time = xtask[2].text
             # task.date = xtask[1].text
