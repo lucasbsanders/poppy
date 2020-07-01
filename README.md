@@ -1,4 +1,9 @@
 # poppy
+The android APK (arm64) can be found in bin/
+The UI code, written in Kivy, is in app_home/
+Linked python modules for OCR and text processing is in modules/
+Static images, wireframes, and some wiki documents are in assets/
+
 
 Currently this is a taskmanager-like project.
 In phase 1, we've:
