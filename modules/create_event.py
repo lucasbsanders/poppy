@@ -1,3 +1,31 @@
+<<<<<<< HEAD
+from ics import Calendar, Event, alarm
+from text_processor import text_pipeline
+from datetime import datetime
+from datetime import timedelta
+
+
+def create_ics_file(duration_directive_tuple):
+    c = Calendar()
+    e = Event()
+    a = alarm
+    directive = duration_directive_tuple[0]
+    duration = duration_directive_tuple[1]
+    frequency = {"ONCE": 1, "ONE": 1, "TWICE": 2, "THRICE": 3, "THREE": 3, "FOUR": 4}
+
+    # Add Error Handling stuff
+    medication = str(input("What would you like to call this medicine: "))
+    print(" ")
+    # Enter in this form '8AM' or '8PM' or '8:30AM' or '8:30PM'
+    time_to_start = str(input("When would you like to start this medication ?: "))
+    print(" ")
+    while True:
+        try:
+            quantity = int(input("How many pills are in the bottle: "))
+            print(" ")
+        except ValueError:
+            print("Please Enter a whole number!!!\n")
+=======
 from ics import Calendar, Event
 from text_processor import text_pipeline
 
@@ -16,10 +44,77 @@ def create_ics_file(duration_directive_tuple):
             quantity = int(input("How many pills are in the bottle: "))
         except ValueError:
             print("Please Enter a whole number!!!")
+>>>>>>> master
             continue
         else:
             break
 
+<<<<<<< HEAD
+    # if "HOURS" in duration:
+    #     # Look for and extract the number range of hours
+    #     hourly_range = 1
+    #     hours = [hour for hour in duration if hour[0].isnumeric()]
+    #
+    #     # Gets rid of any extra numbers left from the preprocessing step
+    #     if len(hours) > 1:
+    #         hours = hours[-1]
+    #
+    #     # This is to check for an hourly range like 4-6 HOURS
+    #     if hours.__contains__("-"):
+    #         # default to one hour
+    #         print("Your are meant to take your medication every", hours, "hours")
+    #         while True:
+    #             try:
+    #                 hourly_range = int(input("In how many hours should I remind you to take your medication?: "))
+    #                 print(" ")
+    #             except ValueError:
+    #                 print("Please Enter a single number in the", hours, "hour", "range")
+    #                 print(" ")
+    #                 continue
+    #             if (hourly_range > 6) | (hourly_range < 4):
+    #                 print("Please Enter a single number in the", hours, "hour", "range")
+    #                 print(" ")
+    #                 continue
+    #             else:
+    #                 break
+    #
+    #         print("A reminder has been set for every", str(hourly_range), "hours")
+    #
+    #         # Create the event
+    #         e.name = " ".join(directive) + '(' + medication + ')'
+    #         date_time = datetime.now()
+    #         e.begin = date_time
+    #         a.duration = hourly_range
+    #         a.repeat = 20
+    #         e.alarms = a
+    #         c.events.add(e)
+    #
+    #         c.events
+    #         with open('prescription.ics', 'w') as my_file:
+    #             my_file.writelines(c)
+    #
+    #     else:
+    #         print("Your are meant to take your medication every", hourly_range, "hours")
+
+            # Create the event
+            # e.name = " ".join(directive) + '(' + medication + ')'
+            # date_time = datetime.now()
+            # e.begin = date_time
+            # a.duration = hourly_range
+            # a.repeat = 20
+            # e.alarms = a
+            # c.events.add(e)
+            #
+            # c.events
+            #
+            # with open('prescription.ics', 'w') as my_file:
+            #     my_file.writelines(c)
+
+    #
+    # if ("DAY" in duration) | ("EVERYDAY" in duration) | ("DAILY" in duration):
+    #
+    # # If the medication is to be taken daily
+=======
     if "HOURS" in duration:
         # Look for and extract the number range of hours
         hours = [hour for hour in duration if hour[0].isnumeric()]
@@ -31,6 +126,7 @@ def create_ics_file(duration_directive_tuple):
         frequency = {"ONCE": 1, "ONE": 1, "TWICE": 2, "THRICE": 3, "THREE": 3,  "FOUR": 4}
 
     # If the medication is to be taken daily
+>>>>>>> master
     # if duration.__contains__("EVERYDAY"):
     #     # duration[0] should be the number of pills taken each time since duration = "# EVERYDAY"
     #     # Use days_to_schedule to figure out how many events to add
@@ -56,7 +152,10 @@ def create_ics_file(duration_directive_tuple):
     # with open('prescription.ics', 'w') as my_file:
     #     my_file.writelines(c)
     # # and it's done !
+<<<<<<< HEAD
+=======
     #
+>>>>>>> master
 
 
 def main():
