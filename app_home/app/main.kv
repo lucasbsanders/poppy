@@ -1,6 +1,7 @@
 #: import rgba kivy.utils.rgba
 #: import icon kivy.garden.iconfonts.icon
 #: import mtx kivy.metrics
+##: import DatePicker KivyCalendar
 #: import NavigationDrawer kivy.garden.navigationdrawer.NavigationDrawer
 
 <MainWindow>:
@@ -240,6 +241,7 @@
 										spacing: ['10dp']
 										size: self.minimum_size
 										size_hint: (None, None)
+										
 										# Today:
 										# 	name: 'Task 1 f43vf3f'
 										# 	time: '10:24'
@@ -248,6 +250,7 @@
 										NewButton:
 											on_release: root.add_new()
 											size_hint: (None, None)
+											markup: True
 											size: [scroll_parent.width/2.4, scroll_parent.height *.9]
 										
 						BoxLayout:
@@ -483,18 +486,18 @@
 			id: datetime
 			size_hint_y: .15
 			padding: '4dp'
-			DatePicker: 
-				id: task_date
-				size_hint_x: .7
-				background_active: ''
-				background_normal: ''
-				background_color: [1,1,1,0]
-				canvas.before:
-					Color:
-						rgba: rgba('#0e1574ff')
-					Rectangle:
-						pos: self.pos
-						size: [self.size[0], 1]
+			# DatePicker: 
+			# 	id: task_date
+			# 	size_hint_x: .7
+			# 	background_active: ''
+			# 	background_normal: ''
+			# 	background_color: [1,1,1,0]
+			# 	canvas.before:
+			# 		Color:
+			# 			rgba: rgba('#0e1574ff')
+			# 		Rectangle:
+			# 			pos: self.pos
+			# 			size: [self.size[0], 1]
 			FlatButton:
 				id: task_time
 				text: '00:00:00'
@@ -509,7 +512,8 @@
 			size_hint_y: .24
 			FlatButton:
 				text: 'Submit'
-				on_release: app.root.add_task(root, (task_name, task_date, task_time))
+				# on_release: app.root.add_task(root, (task_name, task_date, task_time))
+				on_release: app.root.add_task(root, (task_name, task_time))
 				canvas.before:
 					Color:
 						rgba: rgba('#0e1574ff')
