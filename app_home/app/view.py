@@ -243,7 +243,7 @@ class MainWindow (BoxLayout):
         else:
             # Change this later
             # date = ' '.join([xtask[1].text, xtask[2].text])
-            date = xtask[1].text
+            date = datetime.today()
 
             task_ = (xtask[0].text, date)
             # Change this later

@@ -1,7 +1,6 @@
 #: import rgba kivy.utils.rgba
 #: import icon kivy.garden.iconfonts.icon
 #: import mtx kivy.metrics
-##: import DatePicker KivyCalendar
 #: import NavigationDrawer kivy.garden.navigationdrawer.NavigationDrawer
 
 <MainWindow>:
@@ -557,11 +556,11 @@
         anchor_y: 'bottom'
         BoxLayout:
             size_hint_x: .4
-            FlatButton:
-                text: icon('zmdi-refresh')
-                font_size: mtx.sp(18)
-                markup: True
-                on_release: app.root.get_update(root)
+            # FlatButton:
+            #     text: icon('zmdi-refresh')
+            #     font_size: mtx.sp(18)
+            #     markup: True
+            #     on_release: app.root.get_update(root)
             FlatButton:
                 text: icon('zmdi-delete')
                 font_size: mtx.sp(18)
@@ -611,13 +610,13 @@
 		size_hint_y: .75
 		BoxLayout:
 			size_hint_x: .4
-			FlatButton:
-				text: icon('zmdi-refresh')
-				font_size: '24sp'
+			# FlatButton:
+			# 	text: icon('zmdi-refresh')
+			# 	font_size: '24sp'
 				
-				markup: True
-				color: rgba('#4a4a4a')
-				on_release: app.root.get_update(root)
+			# 	markup: True
+			# 	color: rgba('#4a4a4a')
+			# 	on_release: app.root.get_update(root)
 			FlatButton:
 				text: icon('zmdi-delete')
 				font_size: '24sp'
