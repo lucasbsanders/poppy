@@ -2,6 +2,7 @@
 #: import icon kivy.garden.iconfonts.icon
 #: import mtx kivy.metrics
 #: import NavigationDrawer kivy.garden.navigationdrawer.NavigationDrawer
+# #: import XCamera kivy_garden.xcamera
 
 <MainWindow>:
 	orientation: 'vertical'
@@ -58,7 +59,8 @@
 					FlatButton: 
 						text: 'Sign in'
 						size_hint_y: .2
-						on_release: root.auth_user(si_username, si_password)
+						# on_release: root.auth_user(si_username, si_password)
+						on_release: scrn_mngr.current = 'scrn_main'
 						canvas.before:
 							Color:
 								rgba: rgba('#0e1574ff')
@@ -323,7 +325,8 @@
 					orientation: 'vertical'
 					BoxLayout:
 						CameraClick:
-
+						# XCamera:
+							
 				
 
 		Screen:
@@ -630,13 +633,13 @@
         id: camera
         resolution: (480, 640)
         play: True
-		canvas.before:
-            PushMatrix
-            Rotate:
-                angle: -90
-                origin: self.center
-        canvas.after:
-            PopMatrix
+		# canvas.before:
+        #     PushMatrix
+        #     Rotate:
+        #         angle: -90
+        #         origin: self.center
+        # canvas.after:
+        #     PopMatrix
     ToggleButton:
         text: 'Play'
         on_press: camera.play = not camera.play

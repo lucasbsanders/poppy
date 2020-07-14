@@ -1,0 +1,8 @@
+
+app_home/app/__pycache__/
+
+app_home/app/storage/__pycache__/
+
+app_home/app/__init__.pyc
+
+*.pyc

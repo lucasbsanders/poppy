@@ -5,6 +5,8 @@ from kivy.properties import StringProperty, NumericProperty
 from kivy.uix.modalview import ModalView
 from kivy.garden.circulardatetimepicker import CircularTimePicker as CTP
 from kivy.uix.button import Button
+from functools import partial
+from kivy.clock import Clock
 import time
 
 from kivy.metrics import sp, dp
@@ -23,7 +25,9 @@ class CameraClick(BoxLayout):
         '''
         camera = self.ids['camera']
         timestr = time.strftime("%Y%m%d_%H%M%S")
-        camera.export_to_png("IMG_{}.png".format(timestr))
+        Clock.schedule_once(partial(camera.export_to_png,
+                                    "IMG_{}.png".format(timestr)))
+        # camera.export_to_png("/sdcard/IMG_{}.png".format(timestr))
         print("Captured")
 
 
