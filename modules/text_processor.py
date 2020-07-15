@@ -1,41 +1,37 @@
-# pip install sympound
 from spellchecker import SpellChecker
 import re
 from image_processor import img_pipeline
 
 
-def correct_directive(directive):
+def correct_instructions(instruction):
     # The directives get checked and corrected using spellchecker distance ?
     # The strings get corrected to their closest words in the corpus
     # "TAGE 1 TAGLET" becomes "TAKE 1 TABLET"
     spell = SpellChecker()
+    spell.distance = 6
+    keywords = ['every', 'once', 'twice', 'thrice', 'daily', 'hours', 'hour', 'day', 'days',
+                'weeks', 'morning', 'afternoon', 'night', 'one', 'tablet']
     # Tokenize the directive
-    token_directive = directive.split()
+    token_instruction = instruction.split()
     # Spell Check and correct all the elements of the list
-    for counter, token in enumerate(token_directive):
-        if token[0].isalpha():
-            token_directive[counter] = spell.correction(token)
-        # Make the tokens uppercase
-    upper_directive = [token.upper() for token in token_directive]
+    close_words = [spell.candidates(token) for token in token_instruction]
 
-    return upper_directive
+    # Correct any words that are close in distance to the keywords
+    for counter, token in enumerate(token_instruction):
+        for keyword in close_words[counter]:
+            if keyword in keywords:
+                token_instruction[counter] = keyword
 
+    # General spell correction
+    for counter, token in enumerate(token_instruction):
+        if token.isalpha():
+            token_instruction[counter] = spell.correction(token)
 
-def correct_duration(duration):
-    # The durations get checked and corrected using spellchecker distance ?
-    # The strings get corrected to their closest words in the corpus
-    # "Ery 8 Hours" becomes "EVERY 8 HOURS and "
-    spell = SpellChecker()
-    # Tokenize the duration
-    token_duration = duration.split()
-    # Spell Check and correct all the elements of the list
-    for counter, token in enumerate(token_duration):
-        if token[0].isalpha():
-            token_duration[counter] = spell.correction(token)
-    # Make the tokens uppercase
-    upper_duration = [token.upper() for token in token_duration]
+            # Make the tokens uppercase
+    token_instruction = [token.upper() for token in token_instruction]
+    # print(close_words)
 
-    return upper_duration
+    return token_instruction
 
 
 def text_pipeline():
@@ -61,8 +57,8 @@ def text_pipeline():
             "[T][I][M][E][S]?|[D][A]?[I]?[L][Y])",
             preprocessed_text)
         directive = directive_searcher.group(0)
-        token_directive = correct_directive(directive)
-        print("This is the directive:", directive)
+        token_directive = correct_instructions(directive)
+        print("This is the directive:", ' '.join(token_directive))
     except AttributeError:
         print("Couldn't Find the Directive")
 
@@ -73,11 +69,11 @@ def text_pipeline():
             "[D][A][Y][S]?|[W][E][E][K][S]|[M][O][R][N][I][N][G][S]?|[A][F][T][E][R]"
             "[N][O][O][N][S]?|[N][I][G][H][T][S]?)", preprocessed_text)
         duration = duration_searcher.group(0)
-        token_duration = correct_duration(duration)
-        print("This is the duration: ", duration)
+        token_duration = correct_instructions(duration)
+        print("This is the duration: ", ' '.join(token_duration))
     except AttributeError:
         duration = "EVERY DAY"
-        token_duration = correct_duration(duration)
+        token_duration = correct_instructions(duration)
         print("This is the duration: ", duration)
 
     print(token_duration)

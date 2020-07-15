@@ -2,6 +2,7 @@
 # pip install pyspellchecker
 # pip install pytesseract
 import numpy as np
+import glob
 import cv2
 import pytesseract
 import re
@@ -11,10 +12,7 @@ import re
 def resize(img):
     height = img.shape[0]
     width = img.shape[1]
-    # print("The height is:", height)
-    # print("The width is:", width)
 
-    prescription_text = pytesseract.image_to_string(img)
     if (height <= 1499) & (width <= 1999):
         img = cv2.resize(img, None, fx=2, fy=2)
     elif (height >= 1500) & (width >= 2000):
@@ -28,16 +26,26 @@ def img_pipeline():
     pytesseract.pytesseract.tesseract_cmd = r".\Tesseract-OCR\tesseract.exe"
 
     # Reading in the images to process
-    img_one = cv2.imread("images/alamy.jpg")  # Nope lol
-    img_two = cv2.imread("images/amoxicillin.jpeg")  # Good remove fullstops using regex
-    img_three = cv2.imread("images/calvin.jpeg")  # Good
-    img_four = cv2.imread("images/chris.jpg")  # Not Good (directive)
-    img_five = cv2.imread("images/elvis.jpeg")  # Good (duration) make ONA->one
-    img_six = cv2.imread("images/chris2.jpg")  # Good Further processing required
-    img_eight = cv2.imread("images/jane.jpeg")  # Good
-    img_nine = cv2.imread("images/miley.png")  # Good
-    img_ten = cv2.imread("images/opioid-bottle.jpg")  # Good
-    img_eleven = cv2.imread("images/warfarin.jpg")  # Good
+    # Test images
+    # img_one = cv2.imread("images/alamy.jpg")  # Nope lol
+    # img_two = cv2.imread("images/amoxicillin.jpeg")  # Good
+    # img_three = cv2.imread("images/calvin.jpeg")  # Good but there needs to be some unnecessary text removed
+    # img_four = cv2.imread("images/chris.jpg")  # Not Good (directive)
+    # img_five = cv2.imread("images/elvis.jpeg")  # Good (duration)
+    # img_six = cv2.imread("images/chris2.jpg")  # Good Further processing required
+    # img_seven = cv2.imread("images/jane.jpeg")  # Good
+    # img_eight = cv2.imread("images/miley.png")  # Good
+    # img_nine = cv2.imread("images/opioid-bottle.jpg")  # Good
+    # img_ten = cv2.imread("images/warfarin.jpg")  # Good
+
+    img_list = []
+    # find the file with a .png extension
+    for file in glob.glob('./app_home/*.png'):
+        img_list.append(file)
+
+    if len(img_list) == 0:
+        print("Can't find the file")
+        exit()
 
     # Building the Image Processing Pipeline.
     # 1
@@ -45,7 +53,7 @@ def img_pipeline():
     # This size depends on the size of the picture's text
     # If the image is larger than a certain size reduce its size else increase its size
     # Change this so the user can select the image
-    resized = resize(img_ten)
+    resized = resize(cv2.imread(img_list[0]))
 
     # 2
     # Convert the image to grayscale to remove any filtering
