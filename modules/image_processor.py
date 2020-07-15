@@ -25,7 +25,7 @@ def resize(img):
 
 
 def img_pipeline():
-    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+    pytesseract.pytesseract.tesseract_cmd = r".\Tesseract-OCR\tesseract.exe"
 
     # Reading in the images to process
     img_one = cv2.imread("images/alamy.jpg")  # Nope lol
