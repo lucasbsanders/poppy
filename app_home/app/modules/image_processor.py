@@ -38,9 +38,12 @@ def img_pipeline():
     # img_nine = cv2.imread("images/opioid-bottle.jpg")  # Good
     # img_ten = cv2.imread("images/warfarin.jpg")  # Good
 
+    for file in glob.glob('*.png'):
+        print(file)
+
     img_list = []
     # find the file with a .png extension
-    for file in glob.glob('./app_home/*.png'):
+    for file in glob.glob('*.png'):
         img_list.append(file)
 
     if len(img_list) == 0:
@@ -68,7 +71,8 @@ def img_pipeline():
     # cv2.imshow("Canny edges after contouring", edges)
     # cv2.waitKey(0)
     # This is useful for reducing the noise from a background that is not homogeneous
-    threshold = cv2.adaptiveThreshold(greyscale, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 85, 20)
+    threshold = cv2.adaptiveThreshold(
+        greyscale, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 85, 20)
 
     img_to_return = threshold
 

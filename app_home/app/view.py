@@ -12,7 +12,8 @@ import time
 from kivy.metrics import sp, dp
 from kivy.utils import rgba
 from app.storage.db import Database
-
+from .modules.image_processor import *
+from kivy.core.window import Window
 
 from datetime import datetime
 
@@ -25,10 +26,12 @@ class CameraClick(BoxLayout):
         '''
         camera = self.ids['camera']
         timestr = time.strftime("%Y%m%d_%H%M%S")
-        Clock.schedule_once(partial(camera.export_to_png,
-                                    "IMG_{}.png".format(timestr)))
+        # Clock.schedule_once(partial(camera.export_to_png,
+        #                             "IMG_{}.png".format(timestr)))
         # camera.export_to_png("/sdcard/IMG_{}.png".format(timestr))
+        camera.export_to_png("IMG_{}.png".format(timestr))
         print("Captured")
+        img_pipeline()
 
 
 class NewTask(ModalView):
