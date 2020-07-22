@@ -12,8 +12,8 @@ import time
 from kivy.metrics import sp, dp
 from kivy.utils import rgba
 from app.storage.db import Database
-from .modules.image_processor import *
-from kivy.core.window import Window
+from os import path, mkdir
+
 
 from datetime import datetime
 
@@ -26,12 +26,14 @@ class CameraClick(BoxLayout):
         '''
         camera = self.ids['camera']
         timestr = time.strftime("%Y%m%d_%H%M%S")
-        # Clock.schedule_once(partial(camera.export_to_png,
-        #                             "IMG_{}.png".format(timestr)))
+
+        if not path.exists("/sdcard/kivy_temp"):
+            mkdir("/sdcard/kivy_temp")
+
+        Clock.schedule_once(partial(camera.export_to_png,
+                                    "/sdcard/kivy_temp/IMG_{}.png".format(timestr)))
         # camera.export_to_png("/sdcard/IMG_{}.png".format(timestr))
-        camera.export_to_png("IMG_{}.png".format(timestr))
         print("Captured")
-        img_pipeline()
 
 
 class NewTask(ModalView):

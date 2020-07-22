@@ -2,8 +2,7 @@
 #: import icon kivy.garden.iconfonts.icon
 #: import mtx kivy.metrics
 #: import NavigationDrawer kivy.garden.navigationdrawer.NavigationDrawer
-#: import Window kivy.core.window
-# #: import XCamera kivy_garden.xcamera
+
 
 <MainWindow>:
 	orientation: 'vertical'
@@ -324,17 +323,10 @@
 				BoxLayout:
 					size_hint_y: .93
 					orientation: 'vertical'
-					canvas.before:
-						Color:
-							rgba: 0,0,0,0
-						Rectangle:
-							pos: self.pos
-							size: self.size
-					
 					BoxLayout:
 						CameraClick:
 						# XCamera:
-							
+
 				
 
 		Screen:
@@ -639,15 +631,15 @@
     orientation: 'vertical'
     Camera:
         id: camera
-        resolution: (768, 1080)
+        resolution: (480, 640)
         play: True
-		# canvas.before:
-        #     PushMatrix
-        #     Rotate:
-        #         angle: -90
-        #         origin: self.center
-        # canvas.after:
-        #     PopMatrix
+		canvas.before:
+            PushMatrix
+            Rotate:
+                angle: -90
+                origin: self.center
+        canvas.after:
+            PopMatrix
     ToggleButton:
         text: 'Play'
         on_press: camera.play = not camera.play
