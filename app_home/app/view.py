@@ -12,8 +12,9 @@ import time
 from kivy.metrics import sp, dp
 from kivy.utils import rgba
 from app.storage.db import Database
-from os import path, mkdir
-
+from os import path, mkdir, remove
+import base64
+import requests
 
 from datetime import datetime
 
@@ -26,14 +27,34 @@ class CameraClick(BoxLayout):
         '''
         camera = self.ids['camera']
         timestr = time.strftime("%Y%m%d_%H%M%S")
+        print(camera.size)
 
-        if not path.exists("/sdcard/kivy_temp"):
-            mkdir("/sdcard/kivy_temp")
+        # if not path.exists("/sdcard/kivy_temp"):
+        #     mkdir("/sdcard/kivy_temp")
 
-        Clock.schedule_once(partial(camera.export_to_png,
-                                    "/sdcard/kivy_temp/IMG_{}.png".format(timestr)))
-        # camera.export_to_png("/sdcard/IMG_{}.png".format(timestr))
-        print("Captured")
+        # Clock.schedule_once(partial(camera.export_to_png,
+        #                             "/sdcard/kivy_temp/IMG_{}.png".format(timestr)))
+        camera.export_to_png("IMG_{}.png".format(timestr))
+
+        with open("test.jpg".format(timestr), "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read())
+
+        # with open("/sdcard/kivy_temp/IMG_{}.png".format(timestr), "rb") as image_file:
+        #     encoded_string = base64.b64encode(image_file.read())
+
+        data = {'img_string': encoded_string}
+        # r = requests.post(url="http://localhost:5000", data=data)
+        r = requests.post(
+            url="https://guarded-sea-73072.herokuapp.com/", data=data)
+
+        pastebin_url = r.text
+        # print("The pastebin URL is:%s"%pastebin_url)
+        if r.status_code != 200:
+            print("bad analysis")
+        else:
+            print(r.status_code, r.reason, r.content.decode('ascii'))
+        remove("IMG_{}.png".format(timestr))
+        # remove("/sdcard/kivy_temp/IMG_{}.png".format(timestr))
 
 
 class NewTask(ModalView):

@@ -1,12 +1,12 @@
 from kivy.app import App
 from .view import MainWindow
-from android.permissions import request_permissions, Permission
+# from android.permissions import request_permissions, Permission
 
 
 class MainApp(App):
     def build(self):
-        request_permissions([Permission.WRITE_EXTERNAL_STORAGE,
-                             Permission.READ_EXTERNAL_STORAGE, Permission.CAMERA])
+        # request_permissions([Permission.WRITE_EXTERNAL_STORAGE,
+        #                      Permission.READ_EXTERNAL_STORAGE, Permission.CAMERA])
         return MainWindow()
 
     def on_pause(self, *args):

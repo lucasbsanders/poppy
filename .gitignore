@@ -6,3 +6,6 @@ app_home/app/storage/__pycache__/
 app_home/app/__init__.pyc
 
 *.pyc
+
+app_home/db.sqlite
+

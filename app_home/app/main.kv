@@ -633,13 +633,13 @@
         id: camera
         resolution: (480, 640)
         play: True
-		canvas.before:
-            PushMatrix
-            Rotate:
-                angle: -90
-                origin: self.center
-        canvas.after:
-            PopMatrix
+		# canvas.before:
+        #     PushMatrix
+        #     Rotate:
+        #         angle: -90
+        #         origin: self.center
+        # canvas.after:
+        #     PopMatrix
     ToggleButton:
         text: 'Play'
         on_press: camera.play = not camera.play
