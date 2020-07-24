@@ -2,9 +2,10 @@
 
 ## Contributors:
 - Lucas Sanders
-- Haozhe Zhang
+- Haozhe Zhang: Followed tutorials to build up the framework of Kivy, including UI layout, ~~user auth~~ (deprecated), screen transition and generating, storing and displaying tasks. Based on this, also he researched how to build an APK with Buildozer and managed to overcome Android compatibility issues. After completing it, he integrated and tuned a camera module to take photos for further processing and analysis. He then implemented Bandy's OCR modules by hosting the image processing modules on Heroku and managed to process data by sending POST request, containing images converted to base64 strings.
 - Oluwapemisin Bandy-toyo
-- Michel Gonzalez
+- ~~Michel Gonzalez~~
+- Joseph Carlson
 
 ## Directory structure:
 Directory  | Contents
