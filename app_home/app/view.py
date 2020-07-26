@@ -20,6 +20,8 @@ from datetime import datetime
 
 
 class CameraClick(BoxLayout):
+    db = Database()
+
     def capture(self):
         '''
         Function to capture the images and give them the names
@@ -36,7 +38,7 @@ class CameraClick(BoxLayout):
         #                             "/sdcard/kivy_temp/IMG_{}.png".format(timestr)))
         camera.export_to_png("IMG_{}.png".format(timestr))
 
-        with open("test.jpg".format(timestr), "rb") as image_file:
+        with open("IMG_{}.png".format(timestr), "rb") as image_file:
             encoded_string = base64.b64encode(image_file.read())
 
         # with open("/sdcard/kivy_temp/IMG_{}.png".format(timestr), "rb") as image_file:
@@ -52,7 +54,10 @@ class CameraClick(BoxLayout):
         if r.status_code != 200:
             print("bad analysis")
         else:
-            print(r.status_code, r.reason, r.content.decode('ascii'))
+            print(r.status_code, r.reason, r.content.decode('utf-8'))
+            task_ = (r.content.decode('utf-8'), "08:00:00")
+            self.db.add_task(task_)
+
         remove("IMG_{}.png".format(timestr))
         # remove("/sdcard/kivy_temp/IMG_{}.png".format(timestr))
 
@@ -287,6 +292,7 @@ class MainWindow (BoxLayout):
             task.time = xtask[1].text
             task.size_hint = (1, None)
             task.height = dp(100)
+
             if self.db.add_task(task_):
                 uw.add_widget(task)
 
