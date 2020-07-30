@@ -77,6 +77,22 @@ class Database(object):
         except Exception as e:
             print(e)
             return False
+    def delete_task_by_time(self, date):
+        conn = self.db_connect()
+        cur = conn.cursor()
+
+        try:
+
+            sql = '''
+            DELETE FROM tasks
+            WHERE date=?
+            '''
+            cur.execute(sql, [date])
+            conn.commit()
+            return True
+        except Exception as e:
+            print(e)
+            return False
 
     def update_task(self, task: list):
         conn = self.db_connect()
