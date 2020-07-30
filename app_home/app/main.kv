@@ -15,133 +15,6 @@
 			size: self.size
 	ScreenManager:
 	    id: scrn_mngr
-	    Screen:
-	        name: 'scrn_signin'
-	        BoxLayout:
-				orientation: 'vertical'	
-				canvas.before:
-					Color:
-						rgba: rgba('#0e1574ff')
-					Triangle:
-						points: [0, self.size[1], self.size[0], self.size[1], 0, self.size[1]-(.4*self.size[1])]
-					Color:
-						rgba: rgba('#0e1574c8')
-					Triangle:
-						points: [0, self.size[1], self.size[0], self.size[1], self.size[0], self.size[1]-(.4*self.size[1])]
-				Widget:
-					size_hint_y: .25
-
-				Label:
-					text: '%s'%icon('zmdi-account-circle')
-					font_size: mtx.sp('154')
-					markup: True
-					color: rgba('#0e1574ff')
-					size_hint_y: .3
-				BoxLayout:
-					size_hint_y: .45
-					orientation: 'vertical'
-					padding: [mtx.dp(20), 0]
-					# Widget: 
-
-					FlatInput: 
-						id: si_username
-						hint_text: 'username'
-						size_hint_y: .1
-
-					Widget: 
-						size_hint_y: .1
-					FlatInput: 
-						id: si_password
-						hint_text: 'password'
-						password: True
-						size_hint_y: .1
-					Widget:
-						size_hint_y: .3
-					FlatButton: 
-						text: 'Sign in'
-						size_hint_y: .2
-						# on_release: root.auth_user(si_username, si_password)
-						on_release: scrn_mngr.current = 'scrn_main'
-						canvas.before:
-							Color:
-								rgba: rgba('#0e1574ff')
-							RoundedRectangle:
-								pos: self.pos
-								size: self.size
-								radius: [8]
-					FlatButton:
-						text: 'New here? Sign up'
-						size_hint_y: .1
-						color: rgba('#0e1574ff')
-						on_release: scrn_mngr.current = 'scrn_signup'
-					Widget:
-						size_hint_y: .1
-		Screen:
-	        name: 'scrn_signup'
-	        BoxLayout:
-	            orientation: 'vertical'
-				canvas.before:
-					Color:
-						rgba: rgba('#0e1574ff')
-					Rectangle:
-						pos: self.pos
-						size: self.size
-					Color:
-						rgba: rgba('#ffffff')
-					Triangle:
-						points: [0, self.size[1], self.size[0], self.size[1], 0, self.size[1]-(.4*self.size[1])]
-					Color:
-						rgba: rgba('#f2f2f2')
-					Triangle:
-						points: [0, self.size[1], self.size[0], self.size[1], self.size[0], self.size[1]-(.4*self.size[1])]
-				Widget:
-					size_hint_y: .25
-
-				Label:
-					text: '%s'%icon('zmdi-account-circle')
-					font_size: mtx.sp('154')
-					markup: True
-					color: rgba('#ffffff')
-					size_hint_y: .3
-				BoxLayout:
-					size_hint_y: .45
-					orientation: 'vertical'
-					padding: [mtx.dp(20), 0]
-					# Widget: 
-
-					WhiteInput: 
-						id: su_username
-						hint_text: 'username'
-						size_hint_y: .1
-
-					Widget: 
-						size_hint_y: .1
-					WhiteInput: 
-						id: su_password
-						hint_text: 'password'
-						password: True
-						size_hint_y: .1
-					Widget:
-						size_hint_y: .3
-					FlatButton: 
-						text: 'Sign Up'
-						size_hint_y: .2
-						color: rgba('#0e1574ff')
-						on_release: root.add_user(su_username, su_password)
-						canvas.before:
-							Color:
-								rgba: rgba('#ffffff')
-							RoundedRectangle:
-								pos: self.pos
-								size: self.size
-								radius: [8]
-					FlatButton:
-						text: 'Already a user? Sign in'
-						size_hint_y: .1
-						color: rgba('#ffffff')
-						on_release: scrn_mngr.current = 'scrn_signin'
-					Widget:
-						size_hint_y: .1
 		Screen:
 	        name: 'scrn_main'
 			NavigationDrawer:
@@ -296,6 +169,134 @@
 										size: self.minimum_size
 										padding: ['10dp']
 										spacing: ['10dp']
+	    Screen:
+	        name: 'scrn_signin'
+	        BoxLayout:
+				orientation: 'vertical'	
+				canvas.before:
+					Color:
+						rgba: rgba('#0e1574ff')
+					Triangle:
+						points: [0, self.size[1], self.size[0], self.size[1], 0, self.size[1]-(.4*self.size[1])]
+					Color:
+						rgba: rgba('#0e1574c8')
+					Triangle:
+						points: [0, self.size[1], self.size[0], self.size[1], self.size[0], self.size[1]-(.4*self.size[1])]
+				Widget:
+					size_hint_y: .25
+
+				Label:
+					text: '%s'%icon('zmdi-account-circle')
+					font_size: mtx.sp('154')
+					markup: True
+					color: rgba('#0e1574ff')
+					size_hint_y: .3
+				BoxLayout:
+					size_hint_y: .45
+					orientation: 'vertical'
+					padding: [mtx.dp(20), 0]
+					# Widget: 
+
+					FlatInput: 
+						id: si_username
+						hint_text: 'username'
+						size_hint_y: .1
+
+					Widget: 
+						size_hint_y: .1
+					FlatInput: 
+						id: si_password
+						hint_text: 'password'
+						password: True
+						size_hint_y: .1
+					Widget:
+						size_hint_y: .3
+					FlatButton: 
+						text: 'Sign in'
+						size_hint_y: .2
+						# on_release: root.auth_user(si_username, si_password)
+						on_release: scrn_mngr.current = 'scrn_main'
+						canvas.before:
+							Color:
+								rgba: rgba('#0e1574ff')
+							RoundedRectangle:
+								pos: self.pos
+								size: self.size
+								radius: [8]
+					FlatButton:
+						text: 'New here? Sign up'
+						size_hint_y: .1
+						color: rgba('#0e1574ff')
+						on_release: scrn_mngr.current = 'scrn_signup'
+					Widget:
+						size_hint_y: .1
+		Screen:
+	        name: 'scrn_signup'
+	        BoxLayout:
+	            orientation: 'vertical'
+				canvas.before:
+					Color:
+						rgba: rgba('#0e1574ff')
+					Rectangle:
+						pos: self.pos
+						size: self.size
+					Color:
+						rgba: rgba('#ffffff')
+					Triangle:
+						points: [0, self.size[1], self.size[0], self.size[1], 0, self.size[1]-(.4*self.size[1])]
+					Color:
+						rgba: rgba('#f2f2f2')
+					Triangle:
+						points: [0, self.size[1], self.size[0], self.size[1], self.size[0], self.size[1]-(.4*self.size[1])]
+				Widget:
+					size_hint_y: .25
+
+				Label:
+					text: '%s'%icon('zmdi-account-circle')
+					font_size: mtx.sp('154')
+					markup: True
+					color: rgba('#ffffff')
+					size_hint_y: .3
+				BoxLayout:
+					size_hint_y: .45
+					orientation: 'vertical'
+					padding: [mtx.dp(20), 0]
+					# Widget: 
+
+					WhiteInput: 
+						id: su_username
+						hint_text: 'username'
+						size_hint_y: .1
+
+					Widget: 
+						size_hint_y: .1
+					WhiteInput: 
+						id: su_password
+						hint_text: 'password'
+						password: True
+						size_hint_y: .1
+					Widget:
+						size_hint_y: .3
+					FlatButton: 
+						text: 'Sign Up'
+						size_hint_y: .2
+						color: rgba('#0e1574ff')
+						on_release: root.add_user(su_username, su_password)
+						canvas.before:
+							Color:
+								rgba: rgba('#ffffff')
+							RoundedRectangle:
+								pos: self.pos
+								size: self.size
+								radius: [8]
+					FlatButton:
+						text: 'Already a user? Sign in'
+						size_hint_y: .1
+						color: rgba('#ffffff')
+						on_release: scrn_mngr.current = 'scrn_signin'
+					Widget:
+						size_hint_y: .1
+
 
 		Screen:
 			name: 'scrn_camera'
