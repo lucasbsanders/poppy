@@ -1,7 +1,7 @@
 # poppy
 
 ## Contributors:
-- Lucas Sanders
+- Lucas Sanders: Led weekly group progress meetings and held code review & debugging sessions with individuals outside of meetings. Created and maintaned team assets for the project such as the github repo, Teams channel, and group presentation materials. Worked on the Kivy project initial setup, build pipeline, and contributed work including reasearching and sometimes implementing features such as a local database, kivy layout features, the deployment of an API. Defined and continually clarified project requirements and coordinated work. Instructed group members on git practices.
 - Haozhe Zhang: Followed tutorials to build up the framework of Kivy, including UI layout, ~~user auth~~ (deprecated), screen transition and generating, storing and displaying tasks. Based on this, also he researched how to build an APK with Buildozer and managed to overcome Android compatibility issues. After completing it, he integrated and tuned a camera module to take photos for further processing and analysis. He then implemented Bandy's OCR modules by hosting the image processing modules on Heroku and managed to process data by sending POST request, containing images converted to base64 strings.
 - Oluwapemisin Bandy-toyo
 - ~~Michel Gonzalez~~
@@ -40,3 +40,6 @@ In phase 2, we plan to extend the project by:
 1. Because the original library of the date picker is deprecated, we are no longer able to access its date picker widget via pip install. Note that there is an improved version of this library on GitHub, but it doesn't have a pip install command. The orinal library has already been updated to a usable version, but the author hasn't updated the one linked to pip.
 2. Since the date picker has been temporarily disabled, we now group every task into the upcoming category while the date for each task has been automatically set to the day when the task is created.
 3. The task update function has been temporarily disabled due to unknown bugs.
+
+### Backend Repository
+[Poppy API repository](https://github.com/rrrrr4788/Poppy_Backend)
