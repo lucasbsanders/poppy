@@ -163,16 +163,21 @@ class MainWindow (BoxLayout):
     
     def my_callback(self, dt):
         all_tasks = self.db.get_tasks()
+        uw = self.ids.upcoming
 
         for t in all_tasks:
             date, time = t[2].rsplit(' ', 1)
             date_object = datetime.strptime(date[2:]+" "+time, '%y-%m-%d %H:%M:%S')
             # print(date_object, datetime.today())
+            
             if date_object < datetime.today():
                 print("deleting a task")
                 print(t)
                 self.ring_sound.play()
                 self.db.delete_task_by_time(t[2])
+                for child in uw.children:
+                    if child.date == date and child.time == time:
+                        uw.remove_widget(child)
             else:
                 pass
     

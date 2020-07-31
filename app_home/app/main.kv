@@ -123,7 +123,7 @@
 										# 	size_hint: (None, None)
 										# 	size: [scroll_parent.width/2.4, scroll_parent.height *.9]
 										NewButton:
-											# on_release: root.add_new()
+											on_release: scrn_mngr.current = 'scrn_camera'
 											size_hint: (None, None)
 											markup: True
 											size: [scroll_parent.width/2.4, scroll_parent.height *.9]
@@ -660,11 +660,11 @@
         #         origin: self.center
         # canvas.after:
         #     PopMatrix
-    ToggleButton:
-        text: 'Play'
-        on_press: camera.play = not camera.play
-        size_hint_y: None
-        height: '48dp'
+    # ToggleButton:
+    #     text: 'Play'
+    #     on_press: camera.play = not camera.play
+    #     size_hint_y: None
+    #     height: '48dp'
     Button:
         text: 'Capture'
         size_hint_y: None
