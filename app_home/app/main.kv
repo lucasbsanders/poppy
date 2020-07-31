@@ -31,20 +31,12 @@
 						Rectangle:
 							pos: self.pos
 							size: self.size
-					# ListEntry:
-					# 	text: '%s Add New' %icon('zmdi-edit')
-					# 	markup: True
-					# 	color: rgba('#0e5174')
-					# 	size_hint_y: .07
-					# 	on_release: 
-					# 		nav.toggle_state()
-					# 		root.add_new()
-					# Widget:
+					
 					ListEntry:
 						text: '%s Go to Cam' %icon('zmdi-camera')
 						markup: True
 						color: rgba('#0e5174')
-						# size_hint_y: .07
+						size_hint_y: .14
 						on_release: 
 							nav.toggle_state()
 							scrn_mngr.current = 'scrn_camera'
@@ -651,15 +643,15 @@
     orientation: 'vertical'
     Camera:
         id: camera
-        resolution: (480, 640)
+        resolution: (640, 640)
         play: True
-		# canvas.before:
-        #     PushMatrix
-        #     Rotate:
-        #         angle: -90
-        #         origin: self.center
-        # canvas.after:
-        #     PopMatrix
+		canvas.before:
+            PushMatrix
+            Rotate:
+                angle: -90
+                origin: self.center
+        canvas.after:
+            PopMatrix
     # ToggleButton:
     #     text: 'Play'
     #     on_press: camera.play = not camera.play

@@ -8,21 +8,22 @@ from kivy.uix.button import Button
 from functools import partial
 from kivy.clock import Clock
 import time
-from kivy.core.audio import SoundLoader
-# from plyer import vibrator
 from kivy.metrics import sp, dp
 from kivy.utils import rgba
 from app.storage.db import Database
 from os import path, mkdir, remove
 import base64
 import requests
-
+from plyer import vibrator
+from jnius import autoclass
 from datetime import datetime
+
+MediaPlayer = autoclass("android.media.MediaPlayer")
+
 
 
 class CameraClick(BoxLayout):
     db = Database()
-    
     
 
     def capture(self):
@@ -32,32 +33,46 @@ class CameraClick(BoxLayout):
         '''
         camera = self.ids['camera']
         timestr = time.strftime("%Y%m%d_%H%M%S")
-        error_sound = SoundLoader.load('windows_error.mp3')
 
-        # if not path.exists("/sdcard/kivy_temp"):
-        #     mkdir("/sdcard/kivy_temp")
+        # ring_path = path.join(path.abspath(path.dirname(
+        # path.dirname((__file__)))), "ring_ring.mp3")
+        # error_path = path.join(path.abspath(path.dirname(
+        # path.dirname((__file__)))), "windows_error.mp3")
+
+        # ringPlayer = MediaPlayer()
+        # ringPlayer.setDataSource(ring_path)
+        # ringPlayer.prepare()
+        # errorPlayer = MediaPlayer()
+        # errorPlayer.setDataSource(error_path)
+        # errorPlayer.prepare()
+        # print(errorPlayer.getCurrentPosition())
+
+        if not path.exists("/sdcard/kivy_temp"):
+            mkdir("/sdcard/kivy_temp")
 
         # Clock.schedule_once(partial(camera.export_to_png,
         #                             "/sdcard/kivy_temp/IMG_{}.png".format(timestr)))
-        camera.export_to_png("IMG_{}.png".format(timestr))
+        # camera.export_to_png("IMG_{}.png".format(timestr))
+        camera.export_to_png("/sdcard/kivy_temp/IMG_{}.png".format(timestr))
 
-        with open("IMG_{}.png".format(timestr), "rb") as image_file:
-            encoded_string = base64.b64encode(image_file.read())
-
-        # with open("/sdcard/kivy_temp/IMG_{}.png".format(timestr), "rb") as image_file:
+        # with open("IMG_{}.png".format(timestr), "rb") as image_file:
         #     encoded_string = base64.b64encode(image_file.read())
-
+        
+        with open("/sdcard/kivy_temp/IMG_{}.png".format(timestr), "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read())
+        
         data = {'img_string': encoded_string}
-        # r = requests.post(url="http://localhost:5000", data=data)
-        r = requests.post(
-            url="https://guarded-sea-73072.herokuapp.com/", data=data)
+        # r = requests.post(url = "http://localhost:5000", data = data) 
+        r = requests.post(url = "https://guarded-sea-73072.herokuapp.com/", data = data) 
 
-        pastebin_url = r.text
-        # print("The pastebin URL is:%s"%pastebin_url)
+        pastebin_url = r.text 
+        # print("The pastebin URL is:%s"%pastebin_url) 
         if r.status_code != 200:
             print(r.status_code, "bad analysis")
-            error_sound.play()
-            # vibrator.vibrate(0.5)
+            vibrator.vibrate(0.5)
+            # errorPlayer.start()
+            
+
         else:
             print(r.status_code, r.reason, r.content.decode('utf-8'))
             if r.content.decode('utf-8') != "Another One":
@@ -71,9 +86,9 @@ class CameraClick(BoxLayout):
                     if start_of_time:
                         task_ = (body, line[:19])
                         self.db.add_task(task_)
-                        # vibrator.vibrate(0.2)
-                        # time.sleep(0.1)
-                        # vibrator.vibrate(0.2)
+                        vibrator.vibrate(0.2)
+                        time.sleep(0.1)
+                        vibrator.vibrate(0.2)
                     if line.strip() == "The alarms are set for:":
                         start_of_time = True
                         start_of_body = False
@@ -82,11 +97,14 @@ class CameraClick(BoxLayout):
                     if line.strip() == "This is the event below:":
                         start_of_body = True
             else:
-                error_sound.play()
-                # vibrator.vibrate(0.5)
+                vibrator.vibrate(0.5)
+                # errorPlayer.start()
+        # remove("IMG_{}.png".format(timestr))
+        remove("/sdcard/kivy_temp/IMG_{}.png".format(timestr))
+        # errorPlayer.release()
+        # ringPlayer.release()
+        print(self.db.get_tasks())
 
-        remove("IMG_{}.png".format(timestr))
-        # remove("/sdcard/kivy_temp/IMG_{}.png".format(timestr))
 
 
 class NewTask(ModalView):
@@ -156,11 +174,8 @@ class MainWindow (BoxLayout):
     def __init__(self, **kw):
         super().__init__(**kw)
         self.db = Database()
-
-        self.ring_sound = SoundLoader.load('ring_ring.mp3')
         self.init_view()
 
-    
     def my_callback(self, dt):
         all_tasks = self.db.get_tasks()
         uw = self.ids.upcoming
@@ -169,19 +184,19 @@ class MainWindow (BoxLayout):
             date, time = t[2].rsplit(' ', 1)
             date_object = datetime.strptime(date[2:]+" "+time, '%y-%m-%d %H:%M:%S')
             # print(date_object, datetime.today())
-            
             if date_object < datetime.today():
+                print(date_object, datetime.today())
                 print("deleting a task")
                 print(t)
-                self.ring_sound.play()
+                # self.ring_sound.play()
+                vibrator.vibrate(10)
                 self.db.delete_task_by_time(t[2])
                 for child in uw.children:
                     if child.date == date and child.time == time:
                         uw.remove_widget(child)
             else:
                 pass
-    
-
+            
     def init_view(self):
         all_tasks = self.db.get_tasks()
         scroll_parent = Window
@@ -275,7 +290,6 @@ class MainWindow (BoxLayout):
                 task.time = task_data.ids.task_time.text
             task_data.dismiss()
 
-    
     def delete_task(self, task: Today):
         date = task.date + " " + task.time
         # if self.db.delete_task(name):
@@ -318,7 +332,6 @@ class MainWindow (BoxLayout):
             task.time = xtask[1].text
             task.size_hint = (1, None)
             task.height = dp(100)
-
             if self.db.add_task(task_):
                 uw.add_widget(task)
 
