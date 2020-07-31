@@ -8,7 +8,6 @@ from kivy.uix.button import Button
 from functools import partial
 from kivy.clock import Clock
 import time
-
 from kivy.core.audio import SoundLoader
 # from plyer import vibrator
 from kivy.metrics import sp, dp
@@ -161,75 +160,55 @@ class MainWindow (BoxLayout):
         self.ring_sound = SoundLoader.load('ring_ring.mp3')
         self.init_view()
 
-    def init_view(self):
+    
+    def my_callback(self, dt):
         all_tasks = self.db.get_tasks()
-        scroll_parent = Window
-        tw = self.ids.today_wrapper
-        uw = self.ids.upcoming
 
         for t in all_tasks:
-            # Change this later
             date, time = t[2].rsplit(' ', 1)
-            print(t[2])
-            # date = str(datetime.today()).split(' ')[0]
-            # print(time)
             date_object = datetime.strptime(date[2:]+" "+time, '%y-%m-%d %H:%M:%S')
-            print(date_object, datetime.today())
+            # print(date_object, datetime.today())
             if date_object < datetime.today():
                 print("deleting a task")
                 print(t)
                 self.ring_sound.play()
                 self.db.delete_task_by_time(t[2])
             else:
+                pass
+    
 
-            # time = t[2]
-            # Change this later
-            # if self.clean_date(date):
-            #     task = Today()
-            #     task.og_name = t[1]
-            #     task.name = t[1].upper()
-            #     task.time = time
-            #     task.date = date
-            #     task.size_hint = (None, 1)
-            #     task.size = [scroll_parent.width/2.4, 45]
+    def init_view(self):
+        all_tasks = self.db.get_tasks()
+        scroll_parent = Window
+        tw = self.ids.today_wrapper
+        uw = self.ids.upcoming
+        # self.background_thread()
+        Clock.schedule_interval(self.my_callback, 5)
 
-            #     itask = Today()
-            #     itask.og_name = t[1]
-            #     itask.name = t[1].upper()
-            #     itask.time = time
-            #     itask.date = date
-            #     itask.size_hint = (None, None)
-            #     itask.size = [scroll_parent.width /
-            #                   2.4, round(scroll_parent.height/4)]
+        for t in all_tasks:
+            date, time = t[2].rsplit(' ', 1)
+            date_object = datetime.strptime(date[2:]+" "+time, '%y-%m-%d %H:%M:%S')
 
-            #     tw.add_widget(task)
-            #     self.ids.all_today.add_widget(itask)
+            task = Upcoming()
+            task.name = t[1]
+            task.og_name = t[1]
+            task.time = time
+            task.date = date
+            task.size_hint = (1, None)
+            task.height = dp(100)
 
-            # else:
-                task = Upcoming()
-                task.name = t[1]
-                task.og_name = t[1]
-                # Change this later
-                # task.time = ' '.join([date, time])
-                task.time = time
-                task.date = date
-                task.size_hint = (1, None)
-                task.height = dp(100)
+            itask = Upcoming()
+            itask.name = t[1]
+            itask.og_name = t[1]
+            itask.time = time
+            itask.date = date
+            itask.size_hint = (1, None)
+            itask.height = dp(100)
 
-                itask = Upcoming()
-                itask.name = t[1]
-                itask.og_name = t[1]
-                # Change this later
-                # itask.time = ' '.join([date, time])
-                itask.time = time
-                itask.date = date
-                itask.size_hint = (1, None)
-                itask.height = dp(100)
+            uw.add_widget(task)
+            self.ids.all_upcoming.add_widget(itask)
 
-                uw.add_widget(task)
-                self.ids.all_upcoming.add_widget(itask)
-
-                # task.size = [100, 200]
+            # task.size = [100, 200]
         if len(tw.children) > 1:
             for child in tw.children:
                 if type(child) == NewButton:
@@ -291,10 +270,11 @@ class MainWindow (BoxLayout):
                 task.time = task_data.ids.task_time.text
             task_data.dismiss()
 
+    
     def delete_task(self, task: Today):
-        name = task.name
-        date = task.date
+        date = task.date + " " + task.time
         # if self.db.delete_task(name):
+        print(date)
         if self.db.delete_task_by_time(date):
             task.parent.remove_widget(task)
 
