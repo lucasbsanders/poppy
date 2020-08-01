@@ -48,9 +48,9 @@ class CameraClick(BoxLayout):
         #     encoded_string = base64.b64encode(image_file.read())
 
         data = {'img_string': encoded_string}
-        # r = requests.post(url="http://localhost:5000", data=data)
-        r = requests.post(
-            url="https://guarded-sea-73072.herokuapp.com/", data=data)
+        r = requests.post(url="http://localhost:5000", data=data)
+        # r = requests.post(
+        #     url="https://guarded-sea-73072.herokuapp.com/", data=data)
 
         pastebin_url = r.text
         # print("The pastebin URL is:%s"%pastebin_url)

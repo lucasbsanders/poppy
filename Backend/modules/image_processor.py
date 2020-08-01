@@ -39,10 +39,10 @@ def img_pipeline():
     # img_nine = cv2.imread("images/opioid-bottle.jpg")  # Good
     # img_ten = cv2.imread("images/warfarin.jpg")  # Good
 
-    # tr_exe_dir = os.path.join(os.path.abspath(
-    #     os.path.dirname((__file__))), "Tesseract-OCR/tesseract.exe")
-    # pytesseract.pytesseract.tesseract_cmd = tr_exe_dir
-    pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
+    tr_exe_dir = os.path.join(os.path.abspath(
+        os.path.dirname((__file__))), "Tesseract-OCR/tesseract.exe")
+    pytesseract.pytesseract.tesseract_cmd = tr_exe_dir
+    # pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
     img_list = []
     # find the file with a .png extension
     for file in glob.glob('imageToSave.png'):
