@@ -28,12 +28,38 @@ In phase 2, we plan to extend the project by:
 - Integrating a form that will be auto-filled by the OCR/text parser
 - Implementing notifications for events
 
-## UI Usage Instructions
+## UI Usage Instructions (mobile, remote, mobile branch)
 
-1. Register an account where the user name should contain at least 3 characters and the password should contain at least 6 characters.
-2. Hit the big add button or go to sidemenu->Add New to add a task with time specified. 
-3. You may delete the task by tapping the trash can icon.
-4. You may check out the camera module via sidemenu->Camera.
+1. Hit the big add button or go to sidemenu->Go to Cam to go to the Camera Screen.
+2. Take a picture of any prescription description.
+3. Wait till the screen unfreezes itself. If there are two short bursts of vibrations, the reminders are added. Otherwise, please retake a photo.
+4. Restart the app.
+5. Wait till the reminder is triggered. 
+
+## UI Usage Instructions (PC, remote, master branch)
+
+1.	Install kivy and opencv, and then install iconfonts, navigationdrawer, circulardatetimepicker, circularlayout from garden. 
+2.	In our buildozer file, we have also installed python3, kivy, pyjnius, android, kivmob, xcamera, requests, urllib3, chardet, docutils, idna. If there is an exception regarding the missing libraries, installing any of these could be a solution.
+3.	cd to app_home and run python ./main.py (optional) --size=320x645 –dpi=94
+4.	Go to the side menu by clicking the menu icon on the top left, and hit “Go to CAM”. Then you will be directed to the camera screen.
+5.	Hit “capture”. At this moment, the program is going to freeze and is going to take a picture from the webcam, processes it and sends it to our Heroku server for further analysis. 
+6.	(Optional) If you are not satisfied with the photo quality, you may replace the taken photo with any photo containing the desired info. To do this, you need to save a picture in the app_home folder, open app_home/app/view.py, and change the file name in line 41 “with open("IMG_{}.png".format(timestr), "rb") as image_file:” to the name of your picture’s filename.
+7.	Wait till the camera moves again. If you hear an error notification sound, you need to retake the picture. Otherwise, the analysis is successful.
+8.	Close the program, and reopen it.
+9.	You should find a new task in the main screen.
+10.	Wait till the reminder is triggered. 
+
+### Note:
+  
+  Sometimes the Heroku app consistently outputs "503 connection timeout" while receiving the request. There are two ways to tweak around this:
+    1. Email us to restart the dyno.
+    2. Host the backend server locally, which will be explained below.
+
+## UI Usage Instructions (PC, local, local branch)
+
+1. Install the packages in requirements.txt.
+2. In system variables, add a variable named TESSDATA_PREFIX, with the key being \\*Project Directory*\\modules\Tesseract-OCR\tessdata.
+3. Then, run python app.py to start the server.
 
 ### Known Issues
 
