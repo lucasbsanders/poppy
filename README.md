@@ -3,7 +3,7 @@
 ## Contributors:
 - Lucas Sanders: Led weekly group progress meetings and held code review & debugging sessions with individuals outside of meetings. Created and maintaned team assets for the project such as the github repo, Teams channel, and group presentation materials. Worked on the Kivy project initial setup, build pipeline, and contributed work including reasearching and sometimes implementing features such as a local database, kivy layout features, the deployment of an API. Defined and continually clarified project requirements and coordinated work. Instructed group members on git practices.
 - Haozhe Zhang: Followed tutorials to build up the framework of Kivy, including UI layout, ~~user auth~~ (deprecated), screen transition and generating, storing and displaying tasks. Based on this, also he researched how to build an APK with Buildozer and managed to overcome Android compatibility issues. After completing it, he integrated and tuned a camera module to take photos for further processing and analysis. He then implemented Bandy's OCR modules by hosting the image processing modules on Heroku and managed to process data by sending POST request, containing images converted to base64 strings.
-- Oluwapemisin Bandy-toyo
+- Oluwapemisin Bandy-toyo: Implemented the OCR modules for the project. Watched tutorials to learn how to use pytessaract for OCR and other tutorials to figure out how to allow pytessaract extract the most information from the image. These videos included techniques like resizing and adaptive thresholding to get the most out of the images. Researched the datetime module to allow for the creation of events in pytessaract. Researching how to process text information.
 - ~~Michel Gonzalez~~
 - Joseph Carlson
 
