@@ -12,7 +12,7 @@ Directory  | Contents
 ---------- | ----------
 app_home/  | UI written in Kivy
 assets/    | Static images, wireframes, some wiki documents
-bin/       | Android APK file (arm64)
+backend/   | Backend that integrates the OCR modules
 modules/   | Python modules for OCR and text processing
 
 ## Project work breakdown
@@ -22,11 +22,11 @@ In phase 1, we've:
 - Integrated the camera to take pictures
 - Implemented separately the OCR and text-parsing functionality
 
-In phase 2, we plan to extend the project by:
-- Resolving UI issues
-- Connecting the OCR/Text parser to the camera feature of the view
-- Integrating a form that will be auto-filled by the OCR/text parser
-- Implementing notifications for events
+In phase 2, we've:
+- Resolved UI issues
+- Connected the OCR/Text parser to analyze the pictures taken by the camera module
+- Integrated a form that will be auto-filled by the OCR/text parser
+- Implemented notifications for events
 
 ## UI Usage Instructions (mobile, remote, mobile branch)
 
@@ -58,14 +58,12 @@ In phase 2, we plan to extend the project by:
 ## UI Usage Instructions (PC, local, local branch)
 
 1. Install the packages in requirements.txt.
-2. In system variables, add a variable named TESSDATA_PREFIX, with the key being \\*Project Directory*\\modules\Tesseract-OCR\tessdata.
+2. In system variables, add a variable named TESSDATA_PREFIX, with the key being \\**Project Directory**\\modules\Tesseract-OCR\tessdata.
 3. Then, run python app.py to start the server.
 
 ### Known Issues
 
-1. Because the original library of the date picker is deprecated, we are no longer able to access its date picker widget via pip install. Note that there is an improved version of this library on GitHub, but it doesn't have a pip install command. The orinal library has already been updated to a usable version, but the author hasn't updated the one linked to pip.
-2. Since the date picker has been temporarily disabled, we now group every task into the upcoming category while the date for each task has been automatically set to the day when the task is created.
-3. The task update function has been temporarily disabled due to unknown bugs.
+The resolution for the camera module is very device-specific. In our project, it has been set to 640x480, which is the default dimension. However, there is still a possibility that it will cause the program to crash.
 
 ### Backend Repository
 [Poppy API repository](https://github.com/rrrrr4788/Poppy_Backend)
