@@ -5,13 +5,14 @@ from kivy.properties import StringProperty, NumericProperty
 from kivy.uix.modalview import ModalView
 from kivy.garden.circulardatetimepicker import CircularTimePicker as CTP
 from kivy.uix.button import Button
+from kivy.core.audio import SoundLoader
 from functools import partial
 from kivy.clock import Clock
 import time
 from kivy.metrics import sp, dp
 from kivy.utils import rgba
 from app.storage.db import Database
-from os import path, mkdir, remove
+from os import path, mkdir, remove,getcwd,listdir
 import base64
 import requests
 from plyer import vibrator
@@ -86,9 +87,7 @@ class CameraClick(BoxLayout):
                     if start_of_time:
                         task_ = (body, line[:19])
                         self.db.add_task(task_)
-                        vibrator.vibrate(0.2)
-                        time.sleep(0.1)
-                        vibrator.vibrate(0.2)
+                        
                     if line.strip() == "The alarms are set for:":
                         start_of_time = True
                         start_of_body = False
@@ -96,6 +95,9 @@ class CameraClick(BoxLayout):
                         body += line
                     if line.strip() == "This is the event below:":
                         start_of_body = True
+                vibrator.vibrate(0.2)
+                time.sleep(0.1)
+                vibrator.vibrate(0.2)
             else:
                 vibrator.vibrate(0.5)
                 # errorPlayer.start()
