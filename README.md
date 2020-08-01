@@ -23,10 +23,9 @@ In phase 1, we've:
 - Implemented separately the OCR and text-parsing functionality
 
 In phase 2, we've:
-- Resolved UI issues
-- Connected the OCR/Text parser to analyze the pictures taken by the camera module
-- Integrated a form that will be auto-filled by the OCR/text parser
-- Implemented notifications for events
+- Resolved UI issues, streamelined the UI
+- Set up an API for the OCR/Text parser to analyze the pictures taken by the camera module
+- Made code improvements to the text parsing
 
 ## UI Usage Instructions (mobile, remote, mobile branch)
 
