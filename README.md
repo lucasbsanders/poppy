@@ -37,7 +37,7 @@ In phase 2, we've:
 
 ## UI Usage Instructions (PC, remote, master branch)
 
-1.	Install kivy and opencv, and then install iconfonts, navigationdrawer, circulardatetimepicker, circularlayout from garden. 
+1.	Install kivy and opencv, and then install iconfonts, navigationdrawer, circulardatetimepicker, circularlayout, xcamera from garden. 
 2.	In our buildozer file, we have also installed python3, kivy, pyjnius, android, kivmob, xcamera, requests, urllib3, chardet, docutils, idna. If there is an exception regarding the missing libraries, installing any of these could be a solution.
 3.	cd to app_home and run python ./main.py (optional) --size=320x645 –dpi=94
 4.	Go to the side menu by clicking the menu icon on the top left, and hit “Go to CAM”. Then you will be directed to the camera screen.
