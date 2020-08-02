@@ -1,4 +1,5 @@
 # [poppy](https://github.com/rrrrr4788/Poppy_Backend)
+poppy is a mobile application that reads your medication labels and creates reminders for your medication doses automatically.
 
 ## Contributors:
 - Lucas Sanders: Led weekly group progress meetings and held code review & debugging sessions with individuals outside of meetings. Created and maintaned team assets for the project such as the github repo, Teams channel, and group presentation materials. Worked on the Kivy project initial setup, build pipeline, and contributed work including reasearching and sometimes implementing features such as a local database, kivy layout features, the deployment of an API. Defined and continually clarified project requirements and coordinated work. Instructed group members on git practices.
@@ -13,6 +14,7 @@ Directory  | Contents
 app_home/  | UI written in Kivy
 assets/    | Static images, wireframes, some wiki documents
 backend/   | Backend that integrates the OCR modules
+backend/unittesting/   | Backend unit testing
 modules/   | Python modules for OCR and text processing
 
 ## Project work breakdown
@@ -27,41 +29,35 @@ In phase 2, we've:
 - Set up an API for the OCR/Text parser to analyze the pictures taken by the camera module
 - Made code improvements to the text parsing
 
-## Mobile APK Usage Instructions (source code found in `mobile` branch)
+## Using the poppy Application
 
-1. Start app in Android emulator
-2. Touch the "+" button or the sushi menu to open the Camera Screen.
+1. Touch the "+" button or the sushi menu to open the Camera Screen.
 2. Center a picture of any prescription description on the screen, touch "capture" and wait for the app to signal success.
-3. If there are two short bursts of vibrations, the reminders are added. Otherwise, please retake a photo.
-4. Restart the app, view the reminders. Reminders are triggered at the times listed.
+ - (PC Only, optional) If you are not satisfied with the photo quality, you may replace the taken photo with any photo containing the desired info. To do this, you need to save a picture in the app_home folder, open app_home/app/view.py, and change the file name in line 41 “with open("IMG_{}.png".format(timestr), "rb") as image_file:” to the name of your picture’s filename.
+3. If there are two short bursts of vibrations (mobile) or a success sound (PC), the reminders are added. Otherwise, an error signal will be sent, and you must retake the photo.
+4. Restart the app to view the reminders. Reminders are triggered at the times listed, then removed from the UI.
+
+## Mobile APK Instructions (Android) (source code found on `mobile` branch)
+
+1. Start APK in an Android emulator.
 
 ## UI Usage Instructions (PC)
 
-1.	Initialization command: pip install -r requirements.txt
-3.	Executable command: python ./app_home/main.py (optional) --size=320x645 –dpi=94
-4.	Go to the side menu by clicking the menu icon on the top left, and hit “Go to CAM”. Then you will be directed to the camera screen.
-5.	Hit “capture”. At this moment, the program is going to freeze and is going to take a picture from the webcam, processes it and sends it to our Heroku server for further analysis. 
-6.	(Optional) If you are not satisfied with the photo quality, you may replace the taken photo with any photo containing the desired info. To do this, you need to save a picture in the app_home folder, open app_home/app/view.py, and change the file name in line 41 “with open("IMG_{}.png".format(timestr), "rb") as image_file:” to the name of your picture’s filename.
-7.	Wait till the camera moves again. If you hear an error notification sound, you need to retake the picture. Otherwise, the analysis is successful.
-8.	Close the program, and reopen it.
-9.	You should find a new task in the main screen.
-10.	Wait till the reminder is triggered. 
+1.	Initialization command: (must use python 3.7) `pip install -r requirements.txt`
+3.	Executable command: `python ./app_home/main.py --size=320x645 –dpi=94` (the flags are optional but recommended as Kivy has known issues when the screen size is incompatible with a system).
 
-### Note:
-  
-  Sometimes the Heroku app consistently outputs "503 connection timeout" while receiving the request. There are two ways to tweak around this:
-    1. Email us to restart the dyno.
-    2. Host the backend server locally, which will be explained below.
+## API Local Instructions (PC)
 
-## UI Usage Instructions (PC)
-
-1. cd to Backend, install the packages in requirements.txt.
+1. In the backend directory, run the script to install the packages in requirements.txt `pip install -r backend/requirements.txt`
 2. In system variables, add a variable named TESSDATA_PREFIX, with the key being \\**Project Directory**\\modules\Tesseract-OCR\tessdata.
-3. Then, run python app.py to start the server.
+3. Then, run `python backend/app.py` to start the server.
 
 ### Known Issues
 
-The resolution for the camera module is very device-specific. In our project, it has been set to 640x480, which is the default dimension. However, there is still a possibility that it will cause the program to crash.
+- The resolution for the camera module is very device-specific. In our project, it has been set to 640x480, which is the default dimension. However, there is still a possibility that it will cause the program to crash.
+- Sometimes the Heroku app consistently outputs "503 connection timeout" while receiving a request. There are two ways around this:
+    1. Restart the dyno, email Zhang to run that proces.
+    2. Run the backend server locally, explained above.
 
 ### Backend Repository
 [Poppy API repository](https://github.com/rrrrr4788/Poppy_Backend)
