@@ -60,7 +60,7 @@ In phase 2, we've:
     1. Restart the dyno, email Zhang to run that proces.
     2. Run the backend server locally, explained above.
 - Due to the unstability of the framework, the app can crash after several normal operations. Below are the list of the determined glitches:
-    1. Hitting the Android's Go Back button (or doing some gestures, depending on your device) may immediately shut down the program. 
+    1. Hitting Android's Go Back button (or doing some gestures, depending on your device) may immediately shut down the program. 
     2. Sometimes the camera blacks out for no unknown reasons.
     3. When analyzing a picture, if the device is forced to go back to the home screen of Android, the entire screen will be blacked out when re-entering the app.
 
