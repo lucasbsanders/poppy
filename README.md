@@ -15,7 +15,7 @@ app_home/  | UI written in Kivy
 assets/    | Static images, wireframes, some wiki documents
 backend/   | Backend that integrates the OCR modules
 backend/unittesting/   | Backend unit testing
-modules/   | Python modules for OCR and text processing
+executables/    | Mobile APK file for Android debugging
 
 ## Project work breakdown
 In phase 1, we've:
