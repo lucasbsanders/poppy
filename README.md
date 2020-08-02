@@ -43,7 +43,8 @@ In phase 2, we've:
 
 ## UI Usage Instructions (PC)
 
-1.	Initialization command: (must use python 3.7) `pip install -r requirements.txt`
+1. Kivy is not supported after python 3.7. Preferably, Kivy and its dependencies are installed/run in a virtual environment.
+2. Initialization command: `pip install -r requirements.txt`
 3.	Executable command: `python ./app_home/main.py --size=320x645 –dpi=94` (the flags are optional but recommended as Kivy has known issues when the screen size is incompatible with a system).
 
 ## API Local Instructions (PC)
