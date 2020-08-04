@@ -41,17 +41,31 @@ In phase 2, we've:
 
 1. Start APK in an Android emulator.
 
-## UI Usage Instructions (PC)
+## UI Testing Instructions (PC)
 
-1. Kivy is not supported after python 3.7. Preferably, Kivy and its dependencies are installed/run in a virtual environment.
-2. Initialization command: `pip install -r requirements.txt`
-3.	Executable command: `python ./app_home/main.py --size=320x645 –dpi=94` (the flags are optional but recommended as Kivy has known issues when the screen size is incompatible with a system).
+1. First make sure the Python environment is 3.7, because 3.8 is currently not supported yet.
+2. Make sure you have pip, virtualenv, setuptools, and wheel (once):
+   - `python -m pip install --upgrade pip wheel setuptools virtualenv`
+3. Go to the project directory, initiate and activate a virtual environment by typing:
+   - `python -m virtualenv kivy_venv`
+   - `kivy_venv\Scripts\activate`
+4. Install packages in requirements.txt:
+   - `pip install -r requirements.txt`
+5. Install Garden libraries. Note that garden packages are not included in pip, so they need to be installed manually, globally, and one at a time.
+    - `garden install iconfonts`
+    - `garden install navigationdrawer`
+    - `garden install circulardatetimepicker`
+    - `garden install xcamera`
+    - `garden install circularlayout`
+6. Run the app with the following commands:
+    - `cd app_home`
+    - `python main.py`
 
-## API Local Instructions (PC)
+## API Testing Instructions (PC)
 
-1. In the backend directory, run the script to install the packages in requirements.txt `pip install -r backend/requirements.txt`
-2. In system variables, add a variable named TESSDATA_PREFIX, with the key being \\**Project Directory**\\modules\Tesseract-OCR\tessdata.
-3. Then, run `python backend/app.py` to start the server.
+1. In the backend directory (`cd backend`), run the script to install the packages in requirements.txt `pip install -r requirements.txt`
+2. In system variables, add a variable named TESSDATA_PREFIX to the path, with the key being \\**Project Directory**\\modules\Tesseract-OCR\tessdata.
+3. Then, run `python app.py` to start the server.
 
 ### Known Issues
 
