@@ -10,7 +10,7 @@ Kivy-Garden==0.1.4
 kivy-garden.xcamera==2020.613
 numpy==1.19.1
 opencv-python==4.3.0.36
-Pygments==2.6.1
+Pygments==2.7.4
 pypiwin32==223
 pywin32==228
 requests==2.24.0
